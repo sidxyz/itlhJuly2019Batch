@@ -63,7 +63,7 @@
 					<button onclick="printInteger('1')">1</button>
 				</td>
 				<td>
-					<button onclick="printSymbol('%')">%</button>
+					<button onclick="clearCalculator()">AC</button>
 				</td>
 			</tr>
 			<tr>
@@ -92,80 +92,126 @@ $(document).ready(function()
 	
 	$('table').click(function()
 	{
-		alert("clicked on table");	
+		//alert("clicked on table");	
 	})
 });
 
 
-
-//a/lert("outside ready");
-
-
-
 	var output =0;
-	var numbersArray = [];
-	var symbolsArray = [];
 	var numberOneProvided = false;
 	var numberTwoProvided = false;
 
+	function clearCalculator()
+	{
+		document.querySelector("#result").value = '';
+	}
+
 	function printInteger(inputFromCalculator) 
 	{
-		document.querySelector("#result").value += inputFromCalculator;
-		$("#result").value+= inputFromCalculator;
-		var currentIndex = 0;
-
-
-		if(numbersArray.length>1)
-		{
-			currentIndex = numbersArray.length -1;
-		}
-
-		if(numbersArray.length == 0)
-		{
-			numbersArray.push(inputFromCalculator);	
-		}
-		else
-		{
-			if(symbolsArray.length==0)
-			{
-				numbersArray[currentIndex]+= inputFromCalculator;
-			}
-			else
-			{
-
-				if(numberOneProvided == true)
-				{
-					numbersArray[currentIndex]+= ainputFromCalculator;		
-				}
-				else
-				{
-					numbersArray.push(inputFromCalculator);
-					numberOneProvided = true;
-				}		
-			}	
-		}
-		//console.log(numbersArray);
+		document.querySelector("#result").value += inputFromCalculator;		
 	}
 
 	function printSymbol(inputFromCalculator)
 	{
 		document.querySelector("#result").value += inputFromCalculator;
-		symbolsArray.push(inputFromCalculator);
 	}
 
 	function printFinalOutput()
-	{
-		
-		var number1 = parseInt(numbersArray[0]);
-		var number2 = parseInt(numbersArray[1]);
-		var symbol = symbolsArray[0];
-		output = calculate(number1,number2,symbol);
-		document.querySelector("#result").value = output;
+	{			
+		//document.querySelector("#result").value = output;
 
+		var expression = document.querySelector("#result").value;
+	
+		expression+="=";
+		//expression 22+32+22=
+
+		if(sanityCheck(expression)==true)
+		{
+			divideAndConquer(expression);
+
+		 	 
+		}
+
+	}
+
+	function divideAndConquer(expression)
+	{
+		var number1;
+		var number2;
+		var symbol1;
+		var symbol2;
+		var miniExpressionLength;
+		var partialOutput;
+		for(var i=0;i<expression.length;i++)
+		 	 {
+		 	 	if(isNumber(expression[i])==true && number1==null)
+		 	 	{
+		 	 		number1=expression[i];
+		 	 	}
+		 	 	else
+		 	 	{
+		 	 		if(isNumber(expression[i])==true && number1!=null && symbol1==null)
+			 	 	{
+			 	 		number1 = number1 + expression[i]; 	
+			 	 	}
+	
+		 	 	}	
+
+		 	 	if(symbol1!=null && number1!=null && isNumber(expression[i])==true && number2==null)
+		 	 	{
+		 	 		number2 = expression[i];
+		 	 	}
+		 	 	else
+		 	 	{
+		 	 		if(symbol1!=null && number1!=null && isNumber(expression[i])==true && number2!=null && symbol2==null)
+		 	 		{
+		 	 			number2 = number2 + expression[i];		
+		 	 		}
+		 	 	} 
+
+		 	 	
+		 	 	if(isSymbol(expression[i])==true && symbol1==null)
+		 	 	{
+		 	 		symbol1=expression[i];
+		 	 	}
+		 	 	else
+		 	 	{
+		 	 		if(isSymbol(expression[i])==true && symbol1!=null)
+		 	 		{
+		 	 			symbol2=expression[i];		
+		 	 		}
+		 	 	}
+
+		 	 	if(symbol2!=null)
+		 	 	{
+		 	 		miniExpressionLength = i;
+		 	 		//console.log("length of mini expression ="+i)
+		 	 		break;
+		 	 	}	
+		 	 }
+
+		 	partialOutput = calculate(number1,number2,symbol1);
+		 	expression =  partialOutput+""+expression.substring(miniExpressionLength,expression.length);
+
+			if(symbol1!=null)
+			{
+				divideAndConquer(expression);
+			}
+			else
+			{
+				console.log("expression ="+expression); 
+		 		return expression;	
+			}	 	
+
+		 	
+		 	 
 	}
 
 	function calculate(number1,number2,symbol)
 	{
+		number1 = parseInt(number1);
+		number2 = parseInt(number2);
+
 		if(symbol=='+')
 			return number1+number2;
 
@@ -178,9 +224,51 @@ $(document).ready(function()
 		if(symbol=='*')
 			return number1*number2;
 
-		if(symbol=='%')
-			return number1%number2;
+		// if(symbol=='%')
+		// 	return number1%number2;
 	}
+
+	function sanityCheck(expression)
+	{
+		//case example +2+2
+		if(isNumber(expression[0])==false)
+		{
+			alert("invalid expression");
+			return false;
+		}
+
+		for(var i=0;i<expression.length;i++)
+		{
+
+			//case example 2++2
+			if(isSymbol(expression[i])==true && isSymbol(expression[i+1])==true)
+			{
+				alert("invalid expression");
+				return false;
+			}
+
+		}
+		return true;
+
+	}
+
+	function isNumber(whatever)
+	{
+    	if(isNaN(parseInt(whatever)))
+    		return false;
+    	else
+    		return true;
+	}
+
+	function isSymbol(whatever)
+	{
+    	if(isNaN(parseInt(whatever)))
+    		return true;
+    	else
+    		return false;
+	}
+
+	//sanityCheck("2+22=");
 
 </script>
 
