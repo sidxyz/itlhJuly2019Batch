@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>hello js</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var greetMessage = "hello world!";
+			var currentYear = "2019";
+			var number1 = 20;
+			var number2 = 200;
+			var isAlive = true;
+			var isDead = false;
+			//alert(currentYear+number2);
+			var listOfHobbies = ['cricket','sleeping',2020,true,'gaming'];
+
+			console.error(listOfHobbies[1]);
+			console.warn("some non dangerous warning");
+			listOfHobbies[5] = "swimming;";
+			listOfHobbies.push("football");
+
+			for(var i=0;i<listOfHobbies.length;i++)
+			{
+				console.log("======>" +listOfHobbies[i])
+			}	
+			//console.log(listOfHobbies);
+
+			while(listOfHobbies[3]==true)
+			{
+				console.error("virus processing");
+				listOfHobbies[3]=false;	
+			}
+
+
+			// if(listOfHobbies[3]==true)
+			// {
+			// 	alert("Hello world!");
+			// }
+			// else
+			// {
+			// 	alert("Bye world!");	
+			// }
+
+
+			function greet(x)
+			{
+				alert("Welcome "+x+" !");
+			}
+
+			//greet("Sam");
+
+			function calculateTax(salary)
+			{
+
+				var taxAdvisory = "please pay taxes on time";
+
+				if(salary<500000)
+				{
+					alert("no tax");
+				}
+				else
+				{
+					if(salary<1000000)
+					{
+						alert(salary*0.3);
+					}
+					else
+					{
+						alert(salary*0.5);
+					}
+				}
+				
+			}
+
+			alert(taxAdvisory);
+			//calculateTax(800000);
+
+
+		</script>
+	</body>
+</html>

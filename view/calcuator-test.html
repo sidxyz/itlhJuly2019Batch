@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Dynamic Calculator
+	</title>
+	<link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css">
+</head>
+<body>
+<style type="text/css">
+	button {
+		width:100%;
+	}
+</style>
+
+<div class="container-fluid">
+	<h1>Dynamic Calculator</h1>
+	<table>
+		<tbody>
+			<tr>
+				<td colspan="4">
+					<input type="text" name="result" id="result" disabled>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button onclick="printInteger('9')" >9</button>
+				</td>
+				<td>
+					<button onclick="printInteger('8')">8</button>
+				</td>
+				<td>
+					<button onclick="printInteger('7')">7</button>
+				</td>
+				<td>
+					<button onclick="printSymbol('*')">*</button>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<button onclick="printInteger('6')">6</button>
+				</td>
+				<td>
+					<button onclick="printInteger('5')">5</button>
+				</td>
+				<td>
+					<button onclick="printInteger('4')">4</button>
+				</td>
+				<td>
+					<button onclick="printSymbol('/')">/</button>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button onclick="printInteger('3')">3</button>
+				</td>
+				<td>
+					<button onclick="printInteger('2')">2</button>
+				</td>
+				<td>
+					<button onclick="printInteger('1')">1</button>
+				</td>
+				<td>
+					<button onclick="printSymbol('%')">%</button>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button onclick="printInteger('0')">0</button>
+				</td>
+				<td>
+					<button onclick="printSymbol('+')">+</button>
+				</td>
+				<td>
+					<button onclick="printSymbol('-')">-</button>
+				</td>
+				<td>
+					<button onclick="printFinalOutput()">=</button>
+				</td>
+			</tr>
+
+		</tbody>
+		
+	</table>			
+</div>
+<script type="text/javascript">
+
+	var output =0;
+	var number1;
+	var number2;
+	var symbol;
+	var numberOneProvided = false;
+	var numberTwoProvided = false;
+
+	function printInteger(inputFromCalculator) 
+	{
+		document.querySelector("#result").value += inputFromCalculator;
+		//var currentIndex = 0;
+
+		if(number1==null && numberOneProvided==false)
+		{
+			number1 = inputFromCalculator;
+		}
+		else
+		{
+			if(numberOneProvided==false)
+			{
+				number1 +=	inputFromCalculator;	
+			}	
+		}	
+
+
+		if(number2==null && numberTwoProvided==false && numberOneProvided==true)
+		{
+			number2 = inputFromCalculator;
+		}
+		else
+		{
+			if(numberTwoProvided==false  && numberOneProvided==true)
+			{
+				number2 +=	inputFromCalculator;	
+			}	
+		}	
+	}
+
+	function printSymbol(inputFromCalculator)
+	{
+		document.querySelector("#result").value += inputFromCalculator;
+		//symbolsArray.push(inputFromCalculator);
+		if(symbol==null)
+		{
+			symbol = inputFromCalculator;
+		}
+		else
+		{
+			printFinalOutput();
+			document.querySelector("#result").value += inputFromCalculator;
+			symbol = inputFromCalculator;
+		}	
+
+		
+		numberOneProvided = true;
+	}
+
+	function printFinalOutput()
+	{
+		
+		numberTwoProvided = true;
+		// var number1 = parseInt(numbersArray[0]);
+		// var number2 = parseInt(numbersArray[1]);
+		// var symbol = symbolsArray[0];
+		output = calculate(parseInt(number1),parseInt(number2),symbol);
+		number1 = output;
+		numberOneProvided = true;
+		numberTwoProvided = false;
+		number2 = null;
+		document.querySelector("#result").value = output;
+
+	}
+
+	function calculate(number1,number2,symbol)
+	{
+		if(symbol=='+')
+			return number1+number2;
+
+		if(symbol=='-')
+			return number1-number2;
+
+		if(symbol=='/')
+			return number1/number2;
+
+		if(symbol=='*')
+			return number1*number2;
+
+		if(symbol=='%')
+			return number1%number2;
+	}
+
+</script>
+
+</body>
+</html>
