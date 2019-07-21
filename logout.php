@@ -1,4 +1,6 @@
 <?php
 session_start();
 $_SESSION['email'] = null;
-header('location:login.html');
+$_SESSION['rememberMe'] = null;
+$_SESSION['errorMessage']="User logged out successfully!";
+header('location:login.php');

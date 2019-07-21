@@ -1,13 +1,16 @@
 <?php
-
+session_start();
 if($_POST['userName']=='admin@gmail.com' && 
    $_POST['password']=='secret')
    {
-   		session_start();
    		$_SESSION['email'] = $_POST['userName'];
+         // var_dump($_POST['rememberMe']);
+         // die();
+         $_SESSION['rememberMe'] = $_POST['rememberMe'];
    		header('location:home.php');
    }
    else
    {	
-   		header('location:login.html');
+         $_SESSION['errorMessage']="Incorrect username or password";
+   		header('location:login.php');
    }

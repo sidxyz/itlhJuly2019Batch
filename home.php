@@ -7,7 +7,8 @@
 		}
 		else
 		{
-			header('location:login.html');
+			$_SESSION['errorMessage']="Please log in to continue!";
+			header('location:login.php');
 		}	
 	 			
 ?>
