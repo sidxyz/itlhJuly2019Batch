@@ -2,7 +2,7 @@
 
 class Connection {
 	public $username = 'root';
-	public $password = 'amexs123';
+	public $password = 'root';
 	public $connectionString = 'mysql:host=localhost;dbname=itlhjune2019';
 	public $options = [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC];
 
