@@ -31,7 +31,7 @@ $result = $object->executeQuery('select * from users', 'select');
 			<th>EMAIL</th>
 			<th>PHONE</th>
 			<th>MARKS</th>
-			<th>EDIT</th>
+			<th>ACTION</th>
 		</tr>
 <?php
 // var_dump($result);
@@ -44,7 +44,7 @@ for ($i = 0; $i < sizeof($result); $i++) {
 	echo "<td>" . $result[$i]['email'] . "</td>";
 	echo "<td>" . $result[$i]['phone'] . "</td>";
 	echo "<td>" . $result[$i]['marks'] . "</td>";
-	echo "<td><a href='editUser.php?id=" . $result[$i]['id'] . "'>Edit</a></td>";
+	echo "<td><a href='editUser.php?id=" . $result[$i]['id'] . "'>Edit</a> || <a href='deleteUser.php?id=" . $result[$i]['id'] . "'>Delete</a></td>";
 	echo "</tr>";
 }
 ?>
