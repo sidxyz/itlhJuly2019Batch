@@ -29,31 +29,32 @@ if(sizeof($user)>0)
 <html>
 	<head>
 		<title>AIO</title>
+		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	</head>
 	<body>
 		<h1>Fill Details to Register a user</h1>
-		<form action="aioBackEnd.php" method="POST">
+		<form method="POST" action="aioBackEnd.php">
 
 			<label>Id:</label>
-			<input type="text" name="id" value="<?php echo $id ?>"><br/>
+			<input type="text" name="id" id="userId" value="<?php echo $id ?>"><br/>
 
 			<label>Name:</label>
-			<input type="text" name="name" value="<?php echo $name ?>"><br/>
+			<input type="text" name="name" id="name" value="<?php echo $name ?>"><br/>
 
 			<label>College:</label>
-			<input type="text" name="college" value="<?php echo $college ?>"><br/>
+			<input type="text" name="college" id="college" value="<?php echo $college ?>"><br/>
 
 			<label>Email:</label>
-			<input type="email" name="email" value="<?php echo $email ?>"><br/>
+			<input type="email" name="email" id="email" value="<?php echo $email ?>"><br/>
 
 			<label>Password:</label>
-			<input type="password" name="password" value="<?php echo $password ?>"><br/>
+			<input type="password" name="password" id="password" value="<?php echo $password ?>"><br/>
 
 			<label>Phone Number:</label>
-			<input type="number" name="phoneNumber" value="<?php echo $phone ?>"><br/>
+			<input type="number" name="phoneNumber" id="phoneNumber" value="<?php echo $phone ?>"><br/>
 
 			<label>Marks:</label>
-			<input type="number" name="marks" value="<?php echo $marks ?>"><br/>
+			<input type="number" name="marks" id="marks"  value="<?php echo $marks ?>"><br/>
 
 			<button type="submit">Register</button>
 
@@ -91,7 +92,65 @@ if(sizeof($user)>0)
 		?>
 			</tbody>
 		</table>
-
-
 	</body>
+	<!-- <script type="text/javascript">
+	function registerWithoutRefresh()
+	{
+
+		var data = {
+			id:document.querySelector('#userId').value,
+			name:document.querySelector('#name').value,
+			email:document.querySelector('#email').value,
+			college:document.querySelector('#college').value,
+			password:document.querySelector('#password').value,
+			marks:document.querySelector('#marks').value,
+			phone:document.querySelector('#phone').value
+		}
+
+		$.ajax({
+			url:'aioBackEnd.php',
+			data:data,
+			method:'POST',
+			success:successCallBack,
+			error:errorCallBack	
+		});
+
+		function successCallBack()
+		{
+			console.log("ho gaya");
+		}
+		
+		function errorCallBack()
+		{
+			console.log("nope");
+		}
+	}
+
+	function deleteWithoutRefresh(userId)
+	{
+		var data = {
+			action:'delete',
+			id:userId
+		}
+
+		$.ajax({
+			url:'aioBackEnd.php',
+			data:data,
+			method:'POST',
+			success:successCallBack,
+			error:errorCallBack	
+		});
+
+		function successCallBack()
+		{
+			console.log("ho gaya");
+		}
+		
+		function errorCallBack()
+		{
+			console.log("nope");
+		}
+	
+	}
+	</script> -->
 </html>
