@@ -8,6 +8,8 @@
 		<h1>Fill Details to Register a user</h1>
 		<form>
 
+			<!-- <input type="hidden" name=""> -->
+
 			<label>Id:</label>
 			<input type="text" name="id" id="userId" value="<?php echo $id ?>"><br/>
 
@@ -29,7 +31,7 @@
 			<label>Marks:</label>
 			<input type="number" name="marks" id="marks"  value="<?php echo $marks ?>"><br/>
 
-			<button type="button" onclick="registerWithoutRefresh()">Register</button>
+			<button type="button" id="action" onclick="registerWithoutRefresh()">Register</button>
 
 		</form>
 
@@ -84,7 +86,7 @@
 				displayHtml+='<td>'+users[i].email+'</td>'
 				displayHtml+='<td>'+users[i].phone+'</td>'
 				displayHtml+='<td>'+users[i].marks+'</td>'
-				displayHtml+='<td> <button>Edit</button>||<button onclick=deleteWithoutRefresh('+users[i].id+')>Delete</button></td>'
+				displayHtml+='<td> <button onclick=editWithoutRefresh('+users[i].id+')>Edit</button>||<button onclick=deleteWithoutRefresh('+users[i].id+')>Delete</button></td>'
 				displayHtml+='</tr>'
 			}
 
@@ -129,7 +131,8 @@
 		function registerWithoutRefresh()
 		{
 
-			var data = {
+			 var data = 
+			 {
 				id:document.querySelector('#userId').value,
 				name:document.querySelector('#name').value,
 				email:document.querySelector('#email').value,
@@ -137,16 +140,37 @@
 				password:document.querySelector('#password').value,
 				marks:document.querySelector('#marks').value,
 				phoneNumber:document.querySelector('#phoneNumber').value
+			 }
+
+			if(document.querySelector('#action').innerText=="Update")
+			{
+				//run update ajax
+
+				$.ajax({
+					url:'aioBackEndAjax.php?action=update',
+					data:data,
+					method:'GET',
+					success:updateSuccessCallBack,
+					error:updateErrorCallBack	
+				});
+
 			}
+			else
+			{
+				//run insert ajax
 
-			$.ajax({
-				url:'aioBackEndAjax.php',
-				data:data,
-				method:'POST',
-				success:registerSuccessCallBack,
-				error:registerErrorCallBack	
-			});
+				$.ajax({
+					url:'aioBackEndAjax.php?action=register',
+					data:data,
+					method:'GET',
+					success:registerSuccessCallBack,
+					error:registerErrorCallBack	
+				});
 
+			}	
+
+
+			
 		}
 
 		function registerSuccessCallBack(data)
@@ -154,6 +178,7 @@
 			if(data == 'insert successful')
 			{
 				console.log("ho gaya");
+				clearFormFields();
 				fetchStudents();
 			}
 			
@@ -162,6 +187,64 @@
 		function registerErrorCallBack()
 		{
 			console.log("nope");
+		}
+
+		function updateSuccessCallBack(data)
+		{
+			if(data == 'update successful')
+			{
+				console.log("ho gaya");
+				document.querySelector('#action').innerText = 'Register';
+				clearFormFields();
+				fetchStudents();
+			}
+			
+		}
+		
+		function updateErrorCallBack()
+		{
+			console.log("nope");
+		}
+
+		function editWithoutRefresh(userId)
+		{
+
+			$.ajax({
+				url:'aioBackEndAjax.php?action=edit&id='+userId,
+				method:'GET',
+				success:editSuccessCallBack,
+				error:editErrorCallBack	
+			});
+		}
+
+		function editSuccessCallBack(data)
+		{	
+			var user = JSON.parse(data);
+			document.querySelector('#userId').value = user.id;
+			document.querySelector('#name').value = user.name;
+			document.querySelector('#college').value = user.college;
+			document.querySelector('#email').value = user.email;
+			document.querySelector('#phoneNumber').value = user.phone;
+			document.querySelector('#marks').value = user.marks;
+			document.querySelector('#password').value = user.password;
+			document.querySelector('#action').innerText = 'Update';
+		}
+
+		function editErrorCallBack()
+		{
+
+		}
+
+		function clearFormFields()
+		{
+
+			document.querySelector('#userId').value = '';
+			document.querySelector('#name').value = '';
+			document.querySelector('#college').value = '';
+			document.querySelector('#email').value = '';
+			document.querySelector('#phoneNumber').value = '';
+			document.querySelector('#marks').value = '';
+			document.querySelector('#password').value = '';
 		}
 
 		fetchStudents();

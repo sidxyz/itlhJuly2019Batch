@@ -24,9 +24,9 @@ elseif ($_GET['action']=='edit')
 	$users = $database->executeQuery($selectQuery,'select');
 
 	$user = $users[0];
-	
-	$_SESSION['user']=$user;
-	header('location:aio.php');
+
+	echo json_encode($user);
+
 }
 elseif ($_GET['action']=='select') 
 {
@@ -38,16 +38,17 @@ elseif ($_GET['action']=='select')
 	
 	
 }
-else
-{	
+elseif ($_GET['action']=='register') 
+{
 
-	$id = (int) $_POST['id'];
-	$name = $_POST['name'];
-	$college = $_POST['college'];
-	$email = $_POST['email'];
-	$password = $_POST['password'];
-	$phoneNumber = (int) $_POST['phoneNumber'];
-	$marks = (int) $_POST['marks'];
+	
+	$id = (int) $_GET['id'];
+	$name = $_GET['name'];
+	$college = $_GET['college'];
+	$email = $_GET['email'];
+	$password = $_GET['password'];
+	$phoneNumber = (int) $_GET['phoneNumber'];
+	$marks = (int) $_GET['marks'];
 
 
 	$query = "insert into users values($id,'$name','$college','$email','$password',$phoneNumber,$marks)";
@@ -62,27 +63,33 @@ else
 			echo "error in register";
 		}	
 
-	// if($_SESSION['user']!=null) //this means update block
-	// {
-	// $query = "update users set name = '$name', college = '$college', email = '$email', password = '$password', phone = $phoneNumber, marks = $marks 
-	// where id = $id";
-	// 	$output = $database->executeQuery($query, "update");
-	// 	echo $output;
-	// 	$_SESSION['user'] = null;
-	// 	if ($output == true) {
-	// 		header('location:aio.php');
-	// 	} else {
-	// 		var_dump("error in update");
-	// 		die();
-	// 	}
-	// }
-	// else //this means insert block
-	// {
-
-		
-	// }
-
-
+	
 	
 }
+elseif ($_GET['action']=='update') 
+{
 
+	
+	$id = (int) $_GET['id'];
+	$name = $_GET['name'];
+	$college = $_GET['college'];
+	$email = $_GET['email'];
+	$password = $_GET['password'];
+	$phoneNumber = (int) $_GET['phoneNumber'];
+	$marks = (int) $_GET['marks'];
+
+
+	$query = "update users set name = '$name', college = '$college', email = '$email', password = '$password', phone = $phoneNumber, marks = $marks 
+	where id = $id";
+		$output = $database->executeQuery($query, "update");
+		//echo $output;
+		if ($output == true) 
+		{
+			echo "update successful";
+		} 
+		else 
+		{
+			echo "error in update";
+		}	
+	
+}
