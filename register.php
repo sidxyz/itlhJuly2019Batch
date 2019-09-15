@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Data Submission</title>
+		<title>User Registration</title>
 	</head>
 	<body>
-		<h1>Form to Mark Attendance</h1>
-		<form action="showData.php" method="POST">
+		<h1>Fill Details to Register a user</h1>
+		<form action="registerBackEnd.php" method="POST">
 
 			<label>Id:</label>
 			<input type="text" name="id"><br/>
@@ -19,13 +19,16 @@
 			<label>Email:</label>
 			<input type="email" name="email"><br/>
 
+			<label>Password:</label>
+			<input type="password" name="password"><br/>
+
 			<label>Phone Number:</label>
 			<input type="number" name="phoneNumber"><br/>
 
 			<label>Marks:</label>
 			<input type="number" name="marks"><br/>
 
-			<button type="submit">Mark</button>
+			<button type="submit">Register</button>
 
 		</form>
 	</body>
