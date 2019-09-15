@@ -1,0 +1,7 @@
+php artisan migrate
+
+php -S localhost:8002
+
+http://localhost:8002/config.php
+
+php artisan make:controller PagesController

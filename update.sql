@@ -1,0 +1,1 @@
+UPDATE `student` SET `name` = 'Sammy' WHERE `student`.`email` = 'sam@rait.com';
