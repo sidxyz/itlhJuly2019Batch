@@ -46,11 +46,12 @@
     
     <div class="col-md-12 order-md-1">
       
-      <form class="needs-validation" novalidate>
+      <form class="needs-validation" novalidate method="POST" action="/addStudent">
+         @csrf 
         <div class="row">
           <div class="col-md-12 mb-3">
             <label for="firstName">Student name</label>
-            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+            <input type="text" class="form-control" id="firstName" name="name" placeholder="" value="" required>
             <div class="invalid-feedback">
               Valid first name is required.
             </div>
@@ -64,7 +65,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text">@</span>
             </div>
-            <input type="text" class="form-control" id="username" placeholder="Username" required>
+            <input type="text" name="college" class="form-control" id="username" placeholder="Username" required>
             <div class="invalid-feedback" style="width: 100%;">
               Your username is required.
             </div>
@@ -73,7 +74,7 @@
 
         <div class="mb-3">
           <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" placeholder="you@example.com">
+          <input type="email" class="form-control" name="email" id="email" placeholder="you@example.com">
           <div class="invalid-feedback">
             Please enter a valid email address for shipping updates.
           </div>
@@ -81,7 +82,7 @@
 
         <div class="mb-3">
           <label for="address">Phone</label>
-          <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+          <input type="text" class="form-control" name="phone" id="address" placeholder="1234 Main St" required>
           <div class="invalid-feedback">
             Please enter your shipping address.
           </div>
@@ -89,7 +90,7 @@
 
         <div class="mb-3">
           <label for="address2">Password </label>
-          <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+          <input type="text" class="form-control" name="password" id="address2" placeholder="Apartment or suite">
         </div>
 
 

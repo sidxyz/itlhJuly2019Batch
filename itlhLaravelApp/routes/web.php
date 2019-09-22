@@ -27,7 +27,15 @@ Route::get('/showRegistrationForm', 'PagesController@showRegistrationForm');
 
 Route::post('/registrationData', 'PagesController@registrationData');
 
-Route::get('/addStudent','StudentController@addStudent');
+Route::get('/addStudent','StudentController@show');
+
+Route::post('/addStudent','StudentController@store');
+
+Route::get('/showStudents','StudentController@all');
+
+Route::get('/deleteStudent/{id}','StudentController@delete');
+
+
 
 
 // Route::get('/', function () {
