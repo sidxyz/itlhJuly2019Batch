@@ -11,8 +11,8 @@
 				<p>Student email = {{ $data->email }}</p>
 				<p>Student phone = {{ $data->phone }}</p>
 				<p>Student password = {{ $data->password }}</p>
-				<a href="#"> Edit</a> <br>
-				<a href="/deleteStudent/{{ $student->id }}"> Delete</a>
+				<a href="/editStudent/{{ $data->id }}"> Edit</a> <br>
+				<a href="/deleteStudent/{{ $data->id }}"> Delete</a>
 			<hr>	
 		@endforeach
 	</body>

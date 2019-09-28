@@ -35,6 +35,10 @@ Route::get('/showStudents','StudentController@all');
 
 Route::get('/deleteStudent/{id}','StudentController@delete');
 
+Route::get('/editStudent/{id}','StudentController@edit');
+
+Route::post('/updateStudent','StudentController@update');
+
 
 
 
