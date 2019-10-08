@@ -39,6 +39,16 @@ Route::get('/editStudent/{id}','StudentController@edit');
 
 Route::post('/updateStudent','StudentController@update');
 
+Route::get('/addArticle','ArticleController@show');
+
+Route::post('/addArticle','ArticleController@store');
+
+Route::get('/allArticles','ArticleController@all');
+
+Route::get('/article/{id}','ArticleController@seeMoreArticle');
+
+Route::post('/addComment','CommentsController@store');
+
 
 
 
