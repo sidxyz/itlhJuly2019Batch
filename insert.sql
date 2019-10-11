@@ -1,1 +1,0 @@
-INSERT INTO `student` (`name`, `college`, `email`, `phone`, `marks`) VALUES ('Sam', 'RAIT', 'sam@rait.com', '9938878377', '1111');

@@ -1,1 +1,0 @@
-CREATE TABLE `itlhjune2019`.`student` ( `name` TEXT NULL COMMENT 'enter student name here' , `college` TEXT NULL , `email` TEXT NOT NULL , `phone` BIGINT NULL , `marks` BIGINT NULL , UNIQUE `email` (`email`)) ENGINE = InnoDB;
